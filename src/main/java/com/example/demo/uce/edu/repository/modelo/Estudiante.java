@@ -1,14 +1,27 @@
 package com.example.demo.uce.edu.repository.modelo;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Table(name = "estudiante",schema = "public")
+@Entity
 public class Estudiante {
 
+	@Column(name = "estu_nombre")
 	private String nombre;
+	
+	@Column(name = "estu_apellido")
 	private String apellido;
+	
+	@Column(name = "estu_edad")
 	private String edad;
+	
+	
+	@Column(name = "estu_cedula")
+	@Id
 	private String cedula;
-	
-	
-	
 	
 	
 	@Override

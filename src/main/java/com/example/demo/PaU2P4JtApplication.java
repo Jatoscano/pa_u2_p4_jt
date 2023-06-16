@@ -22,14 +22,28 @@ public class PaU2P4JtApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		
+		//Creacion de Tabla Estudiante
 		Estudiante estudiante = new Estudiante();
 		estudiante.setApellido("Toscano");
 		estudiante.setNombre("Juan");
 		estudiante.setEdad("26");
 		estudiante.setCedula("1724693740");
 		
+		//Sistema CRUD
+		
+		//Insertar
 		estudianteService.registrar(estudiante);
 		
+		//Guardar
+		estudianteService.guardar(estudiante);
+		
+		//Buscar
+		estudianteService.buscar("1724693740");
+		estudiante.setNombre("Andres");
+		estudianteService.guardar(estudiante);
+		
+		//Borrar
+		estudianteService.borrar("1724693740");
 	}
 	
 	
