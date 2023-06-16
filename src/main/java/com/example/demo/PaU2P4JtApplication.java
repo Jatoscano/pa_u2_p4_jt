@@ -43,7 +43,7 @@ public class PaU2P4JtApplication implements CommandLineRunner {
 		estudianteService.guardar(estudiante);
 		
 		//Borrar
-		estudianteService.borrar("1724693740");
+		//estudianteService.borrar("1724693740");
 	}
 	
 	
