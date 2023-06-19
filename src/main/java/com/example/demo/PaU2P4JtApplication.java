@@ -33,21 +33,36 @@ public class PaU2P4JtApplication implements CommandLineRunner {
 	
 		Empleado empleado = new Empleado();
 		Ciudadano ciudadano = new Ciudadano();
+		Ciudadano ciudadano2 = new Ciudadano();
 		
-		ciudadano.setId(1);
+		//Ciudadano
 		ciudadano.setApellido("Toscano");
 		ciudadano.setNombre("Juan");
 		ciudadano.setCedula("1724693740");
+		
+		ciudadano2.setApellido("Lucero");
+		ciudadano2.setNombre("Andres");
+		ciudadano2.setCedula("1724693741");
 	
-		empleado.setId(1);
+		//Empleado
 		empleado.setCargo("Coordinador");
 		empleado.setSueldo(new BigDecimal(400));
 		
-		ciudadano.setEmpleado(empleado);
-	    empleado.setCiudadano(ciudadano);
-	    
-	    this.ciudadanoService.registrar(ciudadano);
+	    //CRUD
+		
+	    //Ciudadano
+	    //ciudadano.setEmpleado(empleado);
+	    //this.ciudadanoService.registrar(ciudadano);
+	    //this.ciudadanoService.guardar(ciudadano);
+	    //this.ciudadanoService.buscar(1);
+	    //this.ciudadanoService.borrar(1);
+		
+	    //Empleado
+	    empleado.setCiudadano(ciudadano2);
 	    this.empleadoService.registrar(empleado);
+	    //this.empleadoService.guardar(empleado);
+	    //this.empleadoService.buscar(1);
+	    //this.empleadoService.borrar(1);
 	    
 	}
 	

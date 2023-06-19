@@ -1,5 +1,6 @@
 package com.example.demo.uce.edu.repository.modelo;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,13 +29,13 @@ public class Ciudadano {
 	@Column(name = "ciud_cedula")
 	private String cedula;
 	
-	@OneToOne(mappedBy = "ciudadano")
+	@OneToOne(mappedBy = "ciudadano", cascade = CascadeType.ALL)
 	private Empleado empleado;
-	
 	
 	@Override
 	public String toString() {
-		return "Ciudadano [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula + "]";
+		return "Ciudadano [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula
+				+ ", empleado=" + empleado + "]";
 	}
 	//get and set
 	public Integer getId() {
