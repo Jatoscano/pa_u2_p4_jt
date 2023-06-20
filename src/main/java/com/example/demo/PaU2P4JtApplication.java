@@ -11,15 +11,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.demo.uce.edu.repository.modelo.Autor;
 import com.example.demo.uce.edu.repository.modelo.Libro;
-import com.example.demo.uce.edu.service.AutorService;
+import com.example.demo.uce.edu.service.LibroService;
 
 
 @SpringBootApplication
 public class PaU2P4JtApplication implements CommandLineRunner {
+
 	
 	@Autowired
-	private AutorService autorService;
-
+	private LibroService libroService;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(PaU2P4JtApplication.class, args);
 	}
@@ -27,37 +28,50 @@ public class PaU2P4JtApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Autor autor = new Autor();
-		Libro libro1 = new Libro();
-		Libro libro2 = new Libro();
+		Autor autor1 = new Autor();
+		Autor autor2 = new Autor();
+		Autor autor3 = new Autor();
+		Libro libro = new Libro();
+		
 		Set<Autor> autores = new HashSet<>();
 		Set<Libro> libros = new HashSet<>();
 		
 	
+		//Autores
+		autor1.setNombre("Andres");
+		autor1.setApellido("Cortaza");
 		
-		autor.setNombre("Andres");
-		autor.setApellido("Cortaza");
+		
+		autor2.setNombre("Daniela");
+		autor2.setApellido("Davila");
 		
 		
-		libro1.setTitulo("El viento se lo llevo");
-		libro1.setEditorial("Pearson");
+		autor3.setNombre("Edauardo");
+		autor3.setApellido("Silva");
 		
-		libro2.setTitulo("La vida es bella");
-		libro2.setEditorial("AYLLA");
-		libros.add(libro1);
-		libros.add(libro2);
-		autores.add(autor);
+		
+		//Libros
+		libro.setTitulo("El viento se lo llevo");
+		libro.setEditorial("Pearson");
+		
+		libros.add(libro);
+		autores.add(autor1);
+		autores.add(autor2);
+		autores.add(autor3);
+		
 		//CRUD
 		
-		//Autor
-		autor.setLibros(libros);
-		libro1.setAutores(autores);
-		libro2.setAutores(autores);
-		this.autorService.registrar(autor);
-		this.autorService.guardar(autor);
-		this.autorService.buscar(1);
-		this.autorService.borrar(1);
+		//Libros
 		
+		libro.setAutores(autores);
+		autor1.setLibros(libros);
+		autor2.setLibros(libros);
+		autor3.setLibros(libros);
+		
+		this.libroService.registrar(libro);
+		this.libroService.guardar(libro);
+		this.libroService.buscar(1);
+		this.libroService.borrar(1);
 		
 	}
 	

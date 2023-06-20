@@ -28,7 +28,7 @@ public class Autor {
 	@Column(name = "aut_apellido")
 	private String apellido;
 	
-	@ManyToMany(mappedBy = "autores", cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "autores")
 	private Set<Libro> libros;
 
 	

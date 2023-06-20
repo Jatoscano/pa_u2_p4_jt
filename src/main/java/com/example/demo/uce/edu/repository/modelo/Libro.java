@@ -27,10 +27,10 @@ public class Libro {
 	@Column(name = "libr_titulo")
 	private String titulo;
 	
-	@Column(name = "hote_editorial")
+	@Column(name = "libr_editorial")
 	private String editorial;
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "autor_libro", 
 	           joinColumns = @JoinColumn(name = "auli_id_libro"), 
 	           inverseJoinColumns = @JoinColumn(name  = "auli_id_autor"))
