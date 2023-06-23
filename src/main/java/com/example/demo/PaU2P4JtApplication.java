@@ -1,25 +1,25 @@
 package com.example.demo;
 
-
-import java.util.HashSet;
-import java.util.Set;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.example.demo.uce.edu.repository.modelo.Autor;
-import com.example.demo.uce.edu.repository.modelo.Libro;
-import com.example.demo.uce.edu.service.LibroService;
-
+import com.example.demo.uce.edu.repository.modelo.Alumno;
+import com.example.demo.uce.edu.repository.modelo.Materia;
+import com.example.demo.uce.edu.repository.modelo.Matricula;
+import com.example.demo.uce.edu.service.MatriculaService;
 
 @SpringBootApplication
 public class PaU2P4JtApplication implements CommandLineRunner {
 
 	
 	@Autowired
-	private LibroService libroService;
+	private MatriculaService matriculaService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(PaU2P4JtApplication.class, args);
@@ -28,51 +28,32 @@ public class PaU2P4JtApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Autor autor1 = new Autor();
-		Autor autor2 = new Autor();
-		Autor autor3 = new Autor();
-		Libro libro = new Libro();
+		List<Matricula> matriculas = new ArrayList<>();
 		
-		Set<Autor> autores = new HashSet<>();
-		Set<Libro> libros = new HashSet<>();
-		
-	
-		//Autores
-		autor1.setNombre("Andres");
-		autor1.setApellido("Cortaza");
+		//Objetos -> Alumno - Materia  - Matricula
+		Alumno alumno = new Alumno();
+		Materia materia = new Materia();
+		Matricula matricula = new Matricula();
 		
 		
-		autor2.setNombre("Daniela");
-		autor2.setApellido("Davila");
+		alumno.setNombre("Andres");
 		
+		materia.setNombre("Prog. Avanzada II");
 		
-		autor3.setNombre("Edauardo");
-		autor3.setApellido("Silva");
+		matricula.setNumeroDeMatricula("00-01");
+		matricula.setFechaDeMatricula(LocalDateTime.now());
+		matriculas.add(matricula);
 		
-		
-		//Libros
-		libro.setTitulo("El viento se lo llevo");
-		libro.setEditorial("Pearson");
-		
-		libros.add(libro);
-		autores.add(autor1);
-		autores.add(autor2);
-		autores.add(autor3);
+		alumno.setMatriculas(matriculas);
+		materia.setMatriculas(matriculas);
+		matricula.setAlumno(alumno);
+		matricula.setMateria(materia);
 		
 		//CRUD
-		
-		//Libros
-		
-		libro.setAutores(autores);
-		autor1.setLibros(libros);
-		autor2.setLibros(libros);
-		autor3.setLibros(libros);
-		
-		this.libroService.registrar(libro);
-		this.libroService.guardar(libro);
-		this.libroService.buscar(1);
-		this.libroService.borrar(1);
-		
+		//this.matriculaService.registrar(matricula);
+		this.matriculaService.guardar(matricula);
+		this.matriculaService.buscar(1);
+		this.matriculaService.borrar(1);
 	}
 	
 }
