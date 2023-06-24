@@ -9,17 +9,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.example.demo.uce.edu.repository.modelo.Alumno;
-import com.example.demo.uce.edu.repository.modelo.Materia;
-import com.example.demo.uce.edu.repository.modelo.Matricula;
-import com.example.demo.uce.edu.service.MatriculaService;
+import com.example.demo.uce.edu.repository.modelo.Estudiante;
+import com.example.demo.uce.edu.service.EstudianteService;
 
 @SpringBootApplication
 public class PaU2P4JtApplication implements CommandLineRunner {
 
 	
 	@Autowired
-	private MatriculaService matriculaService;
+	private EstudianteService estudianteService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(PaU2P4JtApplication.class, args);
@@ -28,32 +26,29 @@ public class PaU2P4JtApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		List<Matricula> matriculas = new ArrayList<>();
-		
-		//Objetos -> Alumno - Materia  - Matricula
-		Alumno alumno = new Alumno();
-		Materia materia = new Materia();
-		Matricula matricula = new Matricula();
+		Estudiante estudiante =  new Estudiante();
+		List<Estudiante> estudiantes = new ArrayList<>();
 		
 		
-		alumno.setNombre("Andres");
+		estudiante.setApellido("Davila");
+		estudiante.setNombre("Andres");
+		estudiante.setEdad("26");
+		estudiante.setCedula("1724693741");
 		
-		materia.setNombre("Prog. Avanzada II");
+		estudiantes = this.estudianteService.reporteDeEstudiantes("Toscano");
 		
-		matricula.setNumeroDeMatricula("00-01");
-		matricula.setFechaDeMatricula(LocalDateTime.now());
-		matriculas.add(matricula);
+		for(Estudiante e: estudiantes) {
+			System.out.println(e);
+		}
 		
-		alumno.setMatriculas(matriculas);
-		materia.setMatriculas(matriculas);
-		matricula.setAlumno(alumno);
-		matricula.setMateria(materia);
+		System.out.println(this.estudianteService.buscarPorApellidoYNombre("Toscano", "Andres"));
 		
-		//CRUD
-		//this.matriculaService.registrar(matricula);
-		this.matriculaService.guardar(matricula);
-		this.matriculaService.buscar(1);
-		this.matriculaService.borrar(1);
+		//this.estudianteService.registrar(estudiante);
+		//this.estudianteService.guardar(estudiante);
+		//this.estudianteService.buscarPorApellido("Toscano");
+		
+		System.out.println(this.estudianteService.buscarPorApellidoTyped("Davila"));
+		
 	}
 	
 }

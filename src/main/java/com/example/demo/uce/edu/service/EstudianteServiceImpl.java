@@ -1,5 +1,7 @@
 package com.example.demo.uce.edu.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,8 +38,30 @@ public class EstudianteServiceImpl implements EstudianteService {
 		this.estudianteRepository.eliminar(cedula);
 	}
 
+	@Override
+	public Estudiante buscarPorApellido(String apellido) {
 	
-	
-	
+		return this.estudianteRepository.seleccionarPorApellido(apellido);
+	}
 
+	@Override
+	public List<Estudiante> reporteDeEstudiantes(String apellido) {
+		
+		return this.estudianteRepository.seleccionarListaPorApellido(apellido);
+	}
+
+	@Override
+	public Estudiante buscarPorApellidoYNombre(String apellido, String nombre) {
+		
+		return this.estudianteRepository.seleccionarPorApellidoYNombre(apellido, nombre);
+	}
+
+	@Override
+	public Estudiante buscarPorApellidoTyped(String apellido) {
+		
+		return this.estudianteRepository.seleccionarPorApellidoTyped(apellido);
+	}
+
+
+	
 }

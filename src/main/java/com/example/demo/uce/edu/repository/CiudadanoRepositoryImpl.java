@@ -38,5 +38,7 @@ public class CiudadanoRepositoryImpl implements CiudadanoRepository{
 		
 		this.entityManager.remove(this.seleccionar(id));
 	}
+	
+	
 
 }
