@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,15 +9,16 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.example.demo.uce.edu.repository.modelo.Estudiante;
-import com.example.demo.uce.edu.service.EstudianteService;
+import com.example.demo.uce.edu.repository.modelo.Automovil;
+import com.example.demo.uce.edu.service.AutomovilService;
+
 
 @SpringBootApplication
 public class PaU2P4JtApplication implements CommandLineRunner {
 
 	
 	@Autowired
-	private EstudianteService estudianteService;
+	private AutomovilService automovilService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(PaU2P4JtApplication.class, args);
@@ -26,28 +27,38 @@ public class PaU2P4JtApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Estudiante estudiante =  new Estudiante();
-		List<Estudiante> estudiantes = new ArrayList<>();
+		Automovil automovil = new Automovil();
+		List<Automovil> automoviles = new ArrayList<>();
+		List<Automovil> automovilesTyped = new ArrayList<>();
 		
+		automovil.setMarca("Chevrolet");
+		automovil.setModelo("Aveo");
+		automovil.setAnio(2013);
+		automovil.setPrecio(new BigDecimal(18500));
 		
-		estudiante.setApellido("Davila");
-		estudiante.setNombre("Andres");
-		estudiante.setEdad("26");
-		estudiante.setCedula("1724693741");
+		//Query
+		// 1 Query SingleResult
+		System.out.println(this.automovilService.buscarModelo("Sentra"));
 		
-		estudiantes = this.estudianteService.reporteDeEstudiantes("Toscano");
+		// 1 Query ResultList
+		automoviles = this.automovilService.reporteDeAutomoviles("Chevrolet", "Luv-Dimax");
 		
-		for(Estudiante e: estudiantes) {
+		for(Automovil e: automoviles) {
 			System.out.println(e);
 		}
 		
-		System.out.println(this.estudianteService.buscarPorApellidoYNombre("Toscano", "Andres"));
+		//TypedQuery
+		// 1 TypedQuery SingleResult
+		System.out.println(this.automovilService.buscarModeloTyped("Aveo"));
 		
-		//this.estudianteService.registrar(estudiante);
-		//this.estudianteService.guardar(estudiante);
-		//this.estudianteService.buscarPorApellido("Toscano");
+		// 1 TypedQuery ResultList
+		automovilesTyped = this.automovilService.reportePorAnio(2010);
 		
-		System.out.println(this.estudianteService.buscarPorApellidoTyped("Davila"));
+		for(Automovil e: automovilesTyped) {
+			System.out.println(e);
+		}
+		
+	   //this.automovilService.registrar(automovil);
 		
 	}
 	
