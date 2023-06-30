@@ -38,6 +38,7 @@ public class EstudianteServiceImpl implements EstudianteService {
 		this.estudianteRepository.eliminar(cedula);
 	}
 
+	//Query
 	@Override
 	public Estudiante buscarPorApellido(String apellido) {
 	
@@ -56,12 +57,57 @@ public class EstudianteServiceImpl implements EstudianteService {
 		return this.estudianteRepository.seleccionarPorApellidoYNombre(apellido, nombre);
 	}
 
+	//Typed Query
 	@Override
 	public Estudiante buscarPorApellidoTyped(String apellido) {
 		
 		return this.estudianteRepository.seleccionarPorApellidoTyped(apellido);
 	}
 
+	//Named Query
+	@Override
+	public Estudiante buscaPorApellidos(String apellido) {
+		
+		return this.estudianteRepository.seleccionarPorApellidos(apellido);
+	}
+
+	@Override
+	public Estudiante buscaPorApellidosNamedQuery(String apellido) {
+		
+		return this.estudianteRepository.seleccionarPorApellidosNamedQuery(apellido);
+	}
+	
+	@Override
+	public Estudiante buscarPorNombreNamedQuery(String nombre) {
+		
+		return this.estudianteRepository.seleccionarPorNombreNamedQuery(nombre);
+	}
+
+	//Native Query
+	@Override
+	public Estudiante buscarPorApellidoNativeQuery(String apellido) {
+	
+		return this.estudianteRepository.seleccionarPorApellidoNativeQuery(apellido);
+	}
+
+	@Override
+	public Estudiante buscarPorApellidoNativeQueryNamed(String apellido) {
+		
+		return this.estudianteRepository.seleccionarPorApellidoNativeQueryNamed(apellido);
+	}
 
 	
+	@Override
+	public Estudiante buscarPorNombreNativeQueryNamed(String nombre) {
+		
+		return this.estudianteRepository.seleccionarPorNombreNativeQueryNamed(nombre);
+	}
+	
+	//Criteria API Query
+	@Override
+	public Estudiante buscarPorApellidoCriteriaAPIQuery(String apellido) {
+		
+		return this.estudianteRepository.seleccionarPorApellidoCriteriaAPIQuery(apellido);
+	}
+
 }
