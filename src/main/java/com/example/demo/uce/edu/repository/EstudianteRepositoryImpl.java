@@ -175,6 +175,77 @@ public class EstudianteRepositoryImpl implements EstudianteRepository{
 		TypedQuery<Estudiante> myQueryFinal = this.entityManager.createQuery(myCriteriaQuery);
 		return myQueryFinal.getSingleResult();
 	}
+	
+	@Override
+	public Estudiante seleccionarEstudianteDinamico(String nombre, String apellido, Double peso) {
+		
+		//Construye desde cero el SQL
+		CriteriaBuilder myBuilder = this.entityManager.getCriteriaBuilder();
+				
+		//1. Especficar el tipo de retorno del Query - Sintesis del Typed Query
+		CriteriaQuery<Estudiante> myCriteriaQuery = myBuilder.createQuery(Estudiante.class);
+				
+		//2. Empezamos a crear el SQL
+		//2.1 Definimos el FRONT -> El FROM en Criteria API Query se lo conoce como RooT
+		Root<Estudiante> miTablaFrom = myCriteriaQuery.from(Estudiante.class); //FROM Estudiante
+				
+		//3. Construir las condiciones de mi SQL -> WHERE ->
+	    //Las condiciones se las conoce como Predicados
 
+		// cond > 100 -> e.nombre = ? AND e.apellido = ?
+		// cond < 100 -> e.nombre = ? OR e.apellido = ?
+		
+		//e.nombre = ?
+		Predicate pNombre = myBuilder.equal( miTablaFrom.get("nombre"), nombre); 
+				
+		//e.apellido = ?
+		Predicate pApellido = myBuilder.equal( miTablaFrom.get("apellido"), apellido);
+		
+		//Predicado null
+		Predicate predicadoFinal = null;
+		
+		if(peso.compareTo(Double.valueOf(100)) <= 0) {
+			predicadoFinal = myBuilder.or(pNombre, pApellido);
+		}
+		else {
+			predicadoFinal = myBuilder.and(pNombre, pApellido);
+		}
+		
+		//4. Armamos mi SQL final 
+		myCriteriaQuery.select(miTablaFrom).where(predicadoFinal);
+				
+		//5. Ejecuccion del Query lo realizamos con TypedQuery
+		TypedQuery<Estudiante> myQueryFinal = this.entityManager.createQuery(myCriteriaQuery);
+		return myQueryFinal.getSingleResult();
+	}
+	@Override
+	public int elimimarPorNombre(String nombre) {
+		//SQL
+		//DELETE FROM estudiante WHERE estu_nombre =?
+		
+		//JPQL
+		//DELETE FROM Estudiante e WHERE e.nombre = :datoNombre
+		
+		Query myQuery = this.entityManager.createQuery("DELETE FROM Estudiante e WHERE e.nombre = :datoNombre");
+		myQuery.setParameter("datoNombre", nombre);	
+	    return myQuery.executeUpdate(); //
+	}
+	@Override
+	public int actualizarPorApellido(String nombre, String apellido) {
+		
+		//SQL
+		//UPDATE estudiante SET estu_nombre =? WHERE estu_apellido =?
+		
+		//JPQL
+		//UPDATE Estudiante e SET e.nombre = :datoNombre WHERE e.apellido = :datoApellido
+		Query myQuery = this.entityManager.createQuery("UPDATE Estudiante e SET e.nombre = :datoNombre WHERE e.apellido = :datoApellido");
+		myQuery.setParameter("datoNombre", nombre);
+		myQuery.setParameter("datoApellido", apellido);	
+	    return myQuery.executeUpdate(); 
+	}
+
+	
+	
+	
 	
 }

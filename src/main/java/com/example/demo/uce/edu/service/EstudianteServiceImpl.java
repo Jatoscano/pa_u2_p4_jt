@@ -110,4 +110,23 @@ public class EstudianteServiceImpl implements EstudianteService {
 		return this.estudianteRepository.seleccionarPorApellidoCriteriaAPIQuery(apellido);
 	}
 
+	@Override
+	public Estudiante buscarEstudianteDinamico(String nombre, String apellido, Double peso) {
+		
+		return this.estudianteRepository.seleccionarEstudianteDinamico(nombre, apellido, peso);
+	}
+
+	//UPDATE - DELETE
+	@Override
+	public int borrarPorNombre(String nombre) {
+		
+		return this.estudianteRepository.elimimarPorNombre(nombre);
+	}
+
+	@Override
+	public int guardararPorApellido(String nombre, String apellido) {
+		
+		return this.estudianteRepository.actualizarPorApellido(nombre, apellido);
+	}
+	
 }

@@ -45,41 +45,81 @@ public class Estudiante {
 	@Column(name = "estu_edad")
 	private String edad;
 	
-	
 	@Column(name = "estu_cedula")
 	private String cedula;
 	
+	@Column(name = "estu_peso")
+	private Double peso;
 	
+
 	@Override
 	public String toString() {
-		return "Estudiante [nombre=" + nombre + ", apellido=" + apellido + ", edad=" + edad + ", cedula=" + cedula
-				+ "]";
+		return "Estudiante [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", edad=" + edad + ", cedula="
+				+ cedula + ", peso=" + peso + "]";
 	}
 	//get and set
+
+	public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
 	public String getNombre() {
 		return nombre;
 	}
+
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+
 	public String getApellido() {
 		return apellido;
 	}
+
+
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
+
+
 	public String getEdad() {
 		return edad;
 	}
+
+
 	public void setEdad(String edad) {
 		this.edad = edad;
 	}
+
+
 	public String getCedula() {
 		return cedula;
 	}
+
+
 	public void setCedula(String cedula) {
 		this.cedula = cedula;
 	}
+
+
+	public Double getPeso() {
+		return peso;
+	}
+
+
+	public void setPeso(Double peso) {
+		this.peso = peso;
+	}
+	
+	
+	
 	
 	
 }
