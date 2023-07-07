@@ -22,4 +22,7 @@ public interface AutomovilRepository {
 	//Criteria API Query
 	public Automovil seleccionarAutomovilDinamico(String marca, String modelo, Double potenciaMotor);
 	
+	//UPDATE - DELETE
+	public int elimimarPorMarca(String marca);
+	public int actualizarPorModelo(String marca, String modelo);
 }

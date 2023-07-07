@@ -70,5 +70,17 @@ public class AutomovilServiceImpl implements AutomovilService{
 		
 		return this.automovilRepository.seleccionarAutomovilDinamico(marca, modelo, potenciaMotor);
 	}
+	
+	//UPDATE - DELETE
+	@Override
+	public int borrarPorMarca(String marca) {
+			
+		return this.automovilRepository.elimimarPorMarca(marca);
+	}
 
+	@Override
+	public int guardarPorModelo(String marca, String modelo) {
+			
+		return this.automovilRepository.actualizarPorModelo(marca, modelo);
+	}
 }

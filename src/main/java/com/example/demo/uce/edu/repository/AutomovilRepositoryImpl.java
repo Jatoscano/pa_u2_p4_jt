@@ -157,5 +157,31 @@ public class AutomovilRepositoryImpl implements AutomovilRepository{
 				TypedQuery<Automovil> myQueryFinal = this.entityManager.createQuery(myCriteriaQuery);
 				return myQueryFinal.getSingleResult();
 	}
-	
+
+	//UPDATE - DELETE
+	@Override
+	public int elimimarPorMarca(String marca) {
+		//SQL
+		//DELETE FROM automovil WHERE auto_marca =?
+					
+		//JPQL
+		//DELETE FROM Automovil e WHERE e.marca = :datoMarca
+					
+		Query myQuery = this.entityManager.createQuery("DELETE FROM Automovil e WHERE e.marca = :datoMarca");
+		myQuery.setParameter("datoMarca", marca);	
+		return myQuery.executeUpdate();
+	}
+
+	@Override
+	public int actualizarPorModelo(String marca, String modelo) {
+		//SQL
+		//UPDATE automovil SET auto_marca =? WHERE auto_modelo =?
+					
+		//JPQL
+		//UPDATE Automovil e SET e.marca = :datoMarca WHERE e.modelo = :datoModelo
+		Query myQuery = this.entityManager.createQuery("UPDATE Automovil e SET e.marca = :datoMarca WHERE e.modelo = :datoModelo");
+		myQuery.setParameter("datoMarca", marca);
+		myQuery.setParameter("datoModelo", modelo);	
+		return myQuery.executeUpdate();
+	}
 }

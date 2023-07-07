@@ -37,8 +37,14 @@ public class PaU2P4JtApplication implements CommandLineRunner {
 		//this.automovilService.registrar(automovil);
 		
 		//Criteria API Query
-		System.out.println(this.automovilService.buscarAutomovilDinamico("Audi", "Zero", 3.0));
-		System.out.println(this.automovilService.buscarAutomovilDinamico("Mitsubishi", "Sen", 1.0));
+		//System.out.println(this.automovilService.buscarAutomovilDinamico("Audi", "Zero", 3.0));
+		//System.out.println(this.automovilService.buscarAutomovilDinamico("Mitsubishi", "Sen", 1.0));
+		
+		//UPDATE
+		System.out.println(this.automovilService.borrarPorMarca("Kia"));
+		//DELETE
+		System.out.println(this.automovilService.guardarPorModelo("Kia", "Picanto"));
+		
 	}
 	
 }
