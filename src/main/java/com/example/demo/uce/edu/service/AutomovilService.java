@@ -18,4 +18,9 @@ public interface AutomovilService {
 	//TypedQuery
 	public Automovil buscarModeloTyped(String modelo);
 	public List<Automovil> reportePorAnio(Integer anio);
+	
+	//Criteria API Query
+	public Automovil buscarAutomovilDinamico(String marca, String modelo, Double potenciaMotor);
+		
+	
 }

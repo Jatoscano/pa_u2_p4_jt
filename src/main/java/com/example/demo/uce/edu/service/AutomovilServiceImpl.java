@@ -63,7 +63,12 @@ public class AutomovilServiceImpl implements AutomovilService{
 		
 		return this.automovilRepository.seleccionarPorAnio(anio);
 	}
-	
-	
+
+	//Criteria API Query
+	@Override
+	public Automovil buscarAutomovilDinamico(String marca, String modelo, Double potenciaMotor) {
+		
+		return this.automovilRepository.seleccionarAutomovilDinamico(marca, modelo, potenciaMotor);
+	}
 
 }

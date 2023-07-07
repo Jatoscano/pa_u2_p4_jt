@@ -1,16 +1,14 @@
 package com.example.demo;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.example.demo.uce.edu.repository.modelo.Estudiante;
-import com.example.demo.uce.edu.service.EstudianteService;
+import com.example.demo.uce.edu.repository.modelo.Automovil;
+import com.example.demo.uce.edu.service.AutomovilService;
 
 
 @SpringBootApplication
@@ -18,7 +16,7 @@ public class PaU2P4JtApplication implements CommandLineRunner {
 
 	
 	@Autowired
-	private EstudianteService estudianteService;
+	private AutomovilService automovilService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(PaU2P4JtApplication.class, args);
@@ -27,35 +25,20 @@ public class PaU2P4JtApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Estudiante estudiante = new Estudiante();
+		Automovil automovil = new Automovil();
 		
-		estudiante.setApellido("Aviles");
-		estudiante.setNombre("Orlando");
-		estudiante.setCedula("1728394765");
-		estudiante.setEdad("28");
-		estudiante.setPeso(100.5);
+		automovil.setMarca("Mitsubishi");
+		automovil.setModelo("Sen");
+		automovil.setAnio(1999);
+		automovil.setPrecio(new BigDecimal(20500));
+		automovil.setPotenciaMotor(1.0);
 		
-		//CRUD 
-		//this.estudianteService.registrar(estudiante);
-		
-		//Named Query
-		//System.out.println(this.estudianteService.buscaPorApellidos("Davila"));
-		//System.out.println(this.estudianteService.buscaPorApellidosNamedQuery("Davila"));
-		//System.out.println(this.estudianteService.buscarPorNombreNamedQuery("Juan"));
-		
-		//Native Query
-		//System.out.println(this.estudianteService.buscarPorApellidoNativeQuery("Davila"));
-		//System.out.println(this.estudianteService.buscarPorApellidoNativeQueryNamed("Davila"));
-		//System.out.println(this.estudianteService.buscarPorNombreNativeQueryNamed("Juan"));
+		//CRUD
+		//this.automovilService.registrar(automovil);
 		
 		//Criteria API Query
-		//System.out.println(this.estudianteService.buscarPorApellidoCriteriaAPIQuery("Davila"));
-		System.out.println(this.estudianteService.buscarEstudianteDinamico("Orlando", "Aviles", 100.5));
-		System.out.println(this.estudianteService.buscarEstudianteDinamico("Fernanda", "Avila", 80.2));
-		
-		//UPDATE - DELETE
-		System.out.println(this.estudianteService.borrarPorNombre("Andres"));
-		System.out.println(this.estudianteService.guardararPorApellido("Juan", "Toscano"));
+		System.out.println(this.automovilService.buscarAutomovilDinamico("Audi", "Zero", 3.0));
+		System.out.println(this.automovilService.buscarAutomovilDinamico("Mitsubishi", "Sen", 1.0));
 	}
 	
 }

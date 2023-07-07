@@ -8,4 +8,5 @@ public interface AutorRepository {
 	public void actualizar(Autor autor);
     public Autor seleccionar(Integer id);
 	public void eliminar(Integer id);
+	
 }

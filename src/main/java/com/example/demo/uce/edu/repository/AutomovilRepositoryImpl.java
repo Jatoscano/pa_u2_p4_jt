@@ -10,6 +10,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 
 @Repository
@@ -109,6 +113,49 @@ public class AutomovilRepositoryImpl implements AutomovilRepository{
                 Automovil.class);
         myQuery.setParameter("datoAnio", anio);
         return myQuery.getResultList();
-	}	
+	}
+
+	//Criteria API Query
+	@Override
+	public Automovil seleccionarAutomovilDinamico(String marca, String modelo, Double potenciaMotor) {
+		//Construye desde cero el SQL
+				CriteriaBuilder myBuilder = this.entityManager.getCriteriaBuilder();
+						
+				//1. Especficar el tipo de retorno del Query - Sintesis del Typed Query
+				CriteriaQuery<Automovil> myCriteriaQuery = myBuilder.createQuery(Automovil.class);
+						
+				//2. Empezamos a crear el SQL
+				//2.1 Definimos el FRONT -> El FROM en Criteria API Query se lo conoce como RooT
+				Root<Automovil> miTablaFrom = myCriteriaQuery.from(Automovil.class); //FROM Estudiante
+						
+				//3. Construir las condiciones de mi SQL -> WHERE ->
+			    //Las condiciones se las conoce como Predicados
+
+				// cond > 1.2 -> e.marca = ? AND e.modelo = ?
+				// cond < 1.2 -> e.marca = ? OR e.modelo = ?
+				
+				//e.nombre = ?
+				Predicate pMarca = myBuilder.equal( miTablaFrom.get("marca"), marca); 
+						
+				//e.apellido = ?
+				Predicate pModelo = myBuilder.equal( miTablaFrom.get("modelo"), modelo);
+				
+				//Predicado null
+				Predicate predicadoFinal = null;
+				
+				if(potenciaMotor.compareTo(Double.valueOf(1.2)) <= 0) {
+					predicadoFinal = myBuilder.or(pMarca, pModelo);
+				}
+				else {
+					predicadoFinal = myBuilder.and(pMarca, pModelo);
+				}
+				
+				//4. Armamos mi SQL final 
+				myCriteriaQuery.select(miTablaFrom).where(predicadoFinal);
+						
+				//5. Ejecuccion del Query lo realizamos con TypedQuery
+				TypedQuery<Automovil> myQueryFinal = this.entityManager.createQuery(myCriteriaQuery);
+				return myQueryFinal.getSingleResult();
+	}
 	
 }

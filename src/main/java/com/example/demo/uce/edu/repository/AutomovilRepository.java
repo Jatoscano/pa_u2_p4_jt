@@ -18,4 +18,8 @@ public interface AutomovilRepository {
 	//TypedQuery
 	public Automovil seleccionarModeloTyped(String modelo);
 	public List<Automovil> seleccionarPorAnio(Integer anio);
+	
+	//Criteria API Query
+	public Automovil seleccionarAutomovilDinamico(String marca, String modelo, Double potenciaMotor);
+	
 }
