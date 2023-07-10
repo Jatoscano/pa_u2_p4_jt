@@ -30,7 +30,9 @@ public class HotelRepositoryImpl implements HotelRepository{
 	@Override
 	public Hotel seleccionar(Integer id) {
 		
-		return this.entityManager.find(Hotel.class, id);
+		Hotel hotel = this.entityManager.find(Hotel.class, id);
+		hotel.getHabitaciones().size();
+		return hotel;
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package com.example.demo.uce.edu.service;
 import java.util.List;
 
 import com.example.demo.uce.edu.repository.modelo.Estudiante;
+import com.example.demo.uce.edu.repository.modelo.dto.EstudianteDTO;
 
 public interface EstudianteService {
 
@@ -36,4 +37,7 @@ public interface EstudianteService {
 	//UPDATE - DELETE
 	public int borrarPorNombre(String nombre);
 	public int guardararPorApellido(String nombre, String apellido);
+	
+	//DTO
+	public List<EstudianteDTO> buscarTodosDTO(String nombre, String apellido);
 }
