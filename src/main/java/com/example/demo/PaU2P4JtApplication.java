@@ -1,25 +1,22 @@
 package com.example.demo;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.example.demo.uce.edu.repository.modelo.Habitacion;
-import com.example.demo.uce.edu.repository.modelo.dto.AutomovilDTO;
-import com.example.demo.uce.edu.service.AutomovilService;
-import com.example.demo.uce.edu.service.HotelService;
+import com.example.demo.uce.edu.repository.modelo.Libro;
+import com.example.demo.uce.edu.service.AutorService;
 
 
 @SpringBootApplication
 public class PaU2P4JtApplication implements CommandLineRunner {
 	
 	@Autowired
-	private AutomovilService automovilService;
+	private AutorService autorService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(PaU2P4JtApplication.class, args);
@@ -28,13 +25,13 @@ public class PaU2P4JtApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		AutomovilDTO automovilDTO = new AutomovilDTO();
+		Set<Libro> libros = new HashSet<>();
 		
-		automovilDTO.setModelo("Supra");
-		automovilDTO.setMarca("Toyota");
-		automovilDTO.setPrecio(new BigDecimal(8000));
+		libros = (Set<Libro>) this.autorService.buscar(2).getLibros();
 		
-		System.out.println(this.automovilService.buscarDTO("Sentra", "Nissna", new BigDecimal(8000)));
+		for(Libro e: libros) {
+			System.out.println(e);
+		}
 	}
 	
 }

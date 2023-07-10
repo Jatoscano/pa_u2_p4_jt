@@ -30,8 +30,9 @@ public class AutorRepositoryImpl implements AutorRepository{
 
 	@Override
 	public Autor seleccionar(Integer id) {
-		
-		return this.entityManager.find(Autor.class, id);
+		Autor autor = this.entityManager.find(Autor.class, id);
+		autor.getLibros().size();
+		return autor;
 	}
 
 	@Override
