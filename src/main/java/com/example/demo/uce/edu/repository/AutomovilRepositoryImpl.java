@@ -1,10 +1,12 @@
 package com.example.demo.uce.edu.repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.uce.edu.repository.modelo.Automovil;
+import com.example.demo.uce.edu.repository.modelo.dto.AutomovilDTO;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -183,5 +185,17 @@ public class AutomovilRepositoryImpl implements AutomovilRepository{
 		myQuery.setParameter("datoMarca", marca);
 		myQuery.setParameter("datoModelo", modelo);	
 		return myQuery.executeUpdate();
+	}
+
+	//DTO
+	
+	@Override
+	public List<AutomovilDTO> seleccionarDTO(String modelo, String marca, BigDecimal precio) {
+
+		TypedQuery<AutomovilDTO> myTypedQuery = this.entityManager.createQuery(
+				
+		"SELECT NEW com.example.demo.uce.edu.repository.modelo.dto.AutomovilDTO(e.modelo, e.marca, e.precio) FROM Automovil e ", AutomovilDTO.class);
+		
+		return myTypedQuery.getResultList();
 	}
 }

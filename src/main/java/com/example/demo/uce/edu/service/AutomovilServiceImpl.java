@@ -1,5 +1,6 @@
 package com.example.demo.uce.edu.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.uce.edu.repository.AutomovilRepository;
 import com.example.demo.uce.edu.repository.modelo.Automovil;
+import com.example.demo.uce.edu.repository.modelo.dto.AutomovilDTO;
 
 @Service
 public class AutomovilServiceImpl implements AutomovilService{
@@ -83,4 +85,12 @@ public class AutomovilServiceImpl implements AutomovilService{
 			
 		return this.automovilRepository.actualizarPorModelo(marca, modelo);
 	}
+
+	@Override
+	public List<AutomovilDTO> buscarDTO(String modelo, String marca, BigDecimal precio) {
+		
+		return this.automovilRepository.seleccionarDTO(modelo, marca, precio);
+	}
+	
+	
 }

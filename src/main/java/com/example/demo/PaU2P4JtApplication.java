@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,24 +10,16 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.demo.uce.edu.repository.modelo.Habitacion;
-import com.example.demo.uce.edu.repository.modelo.dto.EstudianteDTO;
-import com.example.demo.uce.edu.service.EstudianteService;
+import com.example.demo.uce.edu.repository.modelo.dto.AutomovilDTO;
+import com.example.demo.uce.edu.service.AutomovilService;
 import com.example.demo.uce.edu.service.HotelService;
-import com.example.demo.uce.edu.service.MatriculaService;
 
 
 @SpringBootApplication
 public class PaU2P4JtApplication implements CommandLineRunner {
-
 	
 	@Autowired
-	private EstudianteService estudianteService;
-	
-	@Autowired
-	private MatriculaService matriculaService;
-	
-	@Autowired
-	private HotelService hotelService;
+	private AutomovilService automovilService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(PaU2P4JtApplication.class, args);
@@ -35,30 +28,13 @@ public class PaU2P4JtApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		EstudianteDTO estudianteDTO = new EstudianteDTO();
-		List<EstudianteDTO> estudianteDTOs = new ArrayList<>();
+		AutomovilDTO automovilDTO = new AutomovilDTO();
 		
-		List<Habitacion> habitaciones = new ArrayList<>();
+		automovilDTO.setModelo("Supra");
+		automovilDTO.setMarca("Toyota");
+		automovilDTO.setPrecio(new BigDecimal(8000));
 		
-		estudianteDTO.setApellido("Toscano");
-		estudianteDTO.setNombre("Juan");
-		
-		//Estudiante
-		//System.out.println(this.estudianteService.buscarTodosDTO("Juan", "Toscano"));
-		
-		//Matricula
-		//System.out.println(this.matriculaService.buscarTodoDTO("Andres", "Prog. Avanzada II"));
-		
-		//Hotel
-		System.out.println(this.hotelService.buscar(4).getNombre());
-		
-		//Habitacion
-		habitaciones = this.hotelService.buscar(4).getHabitaciones();
-		
-		System.out.println("Habitaciones");
-		for (Habitacion e: habitaciones) {
-			System.out.println(e.getNumero());
-		}
+		System.out.println(this.automovilService.buscarDTO("Sentra", "Nissna", new BigDecimal(8000)));
 	}
 	
 }

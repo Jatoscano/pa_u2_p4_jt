@@ -1,8 +1,10 @@
 package com.example.demo.uce.edu.repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.example.demo.uce.edu.repository.modelo.Automovil;
+import com.example.demo.uce.edu.repository.modelo.dto.AutomovilDTO;
 
 public interface AutomovilRepository {
 
@@ -25,4 +27,7 @@ public interface AutomovilRepository {
 	//UPDATE - DELETE
 	public int elimimarPorMarca(String marca);
 	public int actualizarPorModelo(String marca, String modelo);
+	
+	//DTO
+	public List<AutomovilDTO> seleccionarDTO (String modelo, String marca, BigDecimal precio);
 }
